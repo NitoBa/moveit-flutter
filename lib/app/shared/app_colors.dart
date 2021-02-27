@@ -10,4 +10,9 @@ class AppColors {
   static Color texts = Color(0xff666666);
   static Color greyLine = Color(0xffDCDDE0);
   static Color background = Color(0xffF2F3F5);
+
+  static List<Color> blueGradientColors = [
+    blue2,
+    blue2.withOpacity(0.2),
+  ];
 }
