@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moveitflutter/app/app_routes.dart';
+import 'package:moveitflutter/app/app_theme.dart';
 
 import 'app_binding.dart';
 
@@ -9,9 +10,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'MoveItFlutter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppThemes.lightTheme,
       initialBinding: AppBinding(),
       initialRoute: AppRoutes.initalRoute,
       getPages: AppRoutes.routes,
