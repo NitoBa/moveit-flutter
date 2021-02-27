@@ -8,11 +8,15 @@ class SizeConfig {
   static double defaultSize;
   static Orientation orientation;
 
-  void init() {
+  void _init() {
     _mediaQueryData = Get.mediaQuery;
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
     orientation = _mediaQueryData.orientation;
+  }
+
+  SizeConfig() {
+    _init();
   }
 }
 
