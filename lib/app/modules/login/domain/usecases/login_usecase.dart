@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-
-import '../../../../shared/constants.dart';
 import '../../../../shared/error/error_message.dart';
 import '../../../../shared/error/failure.dart';
 import '../entities/user_entity.dart';
 import '../repositories/i_login_repository.dart';
+import '../../../../shared/utils/extensions.dart';
 
 abstract class ILoginUsecase {
   Future<Either<Failure, UserEntity>> call({
@@ -22,10 +21,17 @@ class LoginUsecase implements ILoginUsecase {
     String email,
     String password,
   }) async {
-    bool isValideEmail = RegExp(regexValidateEmail).hasMatch(email);
-
-    if (!isValideEmail) {
+    if (!email.isValidEmail()) {
       return Left(ErrorMessage(message: 'Type an email valid'));
+    }
+
+    if (!password.isValidPassword()) {
+      return Left(
+        ErrorMessage(
+          message:
+              'Your password should be contains between 4 and 12 characters',
+        ),
+      );
     }
 
     final result = await _loginRepository.loginRepository(

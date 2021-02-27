@@ -48,7 +48,7 @@ void main() {
       when(
         repository.loginRepository(
           email: "bruno@gmail.com",
-          password: "incorrect_password",
+          password: "incorrect",
         ),
       ).thenAnswer(
         (_) async => Left(ErrorMessage(message: "Error, incorrect password")),
@@ -56,7 +56,7 @@ void main() {
 
       final result = await usecase(
         email: "bruno@gmail.com",
-        password: "incorrect_password",
+        password: "incorrect",
       );
 
       result.fold((l) => error = l, (r) => null);
@@ -82,6 +82,41 @@ void main() {
       expect(result.isLeft(), isTrue);
       expect(error, isInstanceOf<ErrorMessage>());
       expect(error.message, equals('Type an email valid'));
+    },
+  );
+
+  test(
+    'should be return an error on login when an is password has too much or title characters',
+    () async {
+      Failure error;
+
+      final resultTooMuch = await usecase(
+        email: "bruno@gmail.com",
+        password: "abc",
+      );
+
+      resultTooMuch.fold((l) => error = l, (r) => null);
+
+      expect(resultTooMuch.isLeft(), isTrue);
+      expect(error, isInstanceOf<ErrorMessage>());
+      expect(
+        error.message,
+        equals('Your password should be contains between 4 and 12 characters'),
+      );
+
+      final resultTitle = await usecase(
+        email: "bruno@gmail.com",
+        password: "1234567891022",
+      );
+
+      resultTitle.fold((l) => error = l, (r) => null);
+
+      expect(resultTitle.isLeft(), isTrue);
+      expect(error, isInstanceOf<ErrorMessage>());
+      expect(
+        error.message,
+        equals('Your password should be contains between 4 and 12 characters'),
+      );
     },
   );
 }
