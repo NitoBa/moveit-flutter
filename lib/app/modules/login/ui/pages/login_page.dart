@@ -25,91 +25,116 @@ class LoginPage extends GetView<LoginController> {
               width: getProportionateScreenWidth(768),
             ),
           ),
-          Row(
-            children: [
-              Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          SingleChildScrollView(
+            child: Container(
+              height: Get.mediaQuery.size.height,
+              width: Get.mediaQuery.size.width,
+              child: Row(
                 children: [
                   Spacer(),
-                  WebsafeSvg.asset(
-                    "assets/images/Logo.svg",
-                    height: getProportionateScreenHeight(76),
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(66),
-                  ),
-                  Text(
-                    "Bem-vindo",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: getProportionateScreenHeight(36),
-                    ),
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(30),
-                  ),
-                  InputText(
-                    hintText: "Digite seu email",
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(18),
-                  ),
-                  InputText(
-                    hintText: "Digite sua senha",
-                    isPasswordInput: true,
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(25),
-                  ),
-                  WidgetButton(
-                    height: getProportionateScreenHeight(80),
-                    width: getProportionateScreenWidth(420),
-                    textFontSize: getProportionateScreenHeight(30),
-                    text: "Login",
-                    suffixIcon: FeatherIcons.logIn,
-                    onPressed: () {},
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(152),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(10),
-                      radius: 10,
-                      child: Row(
-                        children: [
-                          Text(
-                            "cadastre-se agora",
-                            style: TextStyle(
-                              color: Colors.white,
-                              decoration: TextDecoration.underline,
-                              fontSize: getProportionateScreenHeight(20),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          SizedBox(
-                            width: getProportionateScreenWidth(5),
-                          ),
-                          Icon(
-                            FeatherIcons.arrowRight,
-                            color: Colors.white,
-                            size: getProportionateScreenHeight(22),
-                          ),
-                        ],
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Spacer(),
+                      WebsafeSvg.asset(
+                        "assets/images/Logo.svg",
+                        height: getProportionateScreenHeight(76),
                       ),
-                      onTap: () => Get.toNamed('/login/register'),
-                    ),
+                      SizedBox(
+                        height: getProportionateScreenHeight(66),
+                      ),
+                      Text(
+                        "Bem-vindo",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: getProportionateScreenHeight(36),
+                        ),
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenHeight(30),
+                      ),
+                      InputText(
+                        controller: controller.emailController,
+                        hintText: "Digite seu email",
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenHeight(18),
+                      ),
+                      InputText(
+                        controller: controller.passwordController,
+                        hintText: "Digite sua senha",
+                        isPasswordInput: true,
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenHeight(25),
+                      ),
+                      Obx(
+                        () {
+                          if (controller.isLoadingOnLogin) {
+                            return Container(
+                              height: getProportionateScreenHeight(80),
+                              width: getProportionateScreenWidth(420),
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return WidgetButton(
+                              height: getProportionateScreenHeight(80),
+                              width: getProportionateScreenWidth(420),
+                              textFontSize: getProportionateScreenHeight(30),
+                              text: "Login",
+                              suffixIcon: FeatherIcons.logIn,
+                              onPressed: controller.loginAction,
+                            );
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: getProportionateScreenHeight(152),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          radius: 10,
+                          child: Row(
+                            children: [
+                              Text(
+                                "cadastre-se agora",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline,
+                                  fontSize: getProportionateScreenHeight(20),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(
+                                width: getProportionateScreenWidth(5),
+                              ),
+                              Icon(
+                                FeatherIcons.arrowRight,
+                                color: Colors.white,
+                                size: getProportionateScreenHeight(22),
+                              ),
+                            ],
+                          ),
+                          onTap: () => Get.toNamed('/login/register'),
+                        ),
+                      ),
+                      Spacer(),
+                    ],
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: getProportionateScreenWidth(200),
+                  ),
                 ],
               ),
-              SizedBox(
-                width: getProportionateScreenWidth(200),
-              ),
-            ],
+            ),
           ),
         ],
       ),

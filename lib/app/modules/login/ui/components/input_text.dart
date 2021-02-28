@@ -88,6 +88,7 @@ class _InputTextState extends State<InputText> {
               child: Icon(
                 passwordIsVisible ? Icons.visibility : Icons.visibility_off,
                 color: Colors.white,
+                size: getProportionateScreenHeight(24),
               ),
               onTap: _changedPasswordVisibility,
             )

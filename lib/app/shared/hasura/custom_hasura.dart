@@ -11,11 +11,43 @@ class CustomHasuraConnect {
     if (client != null) {
       _hasuraConnect = client;
     } else {
-      _hasuraConnect = HasuraConnect(BASE_URL);
+      final interceptor = _HasuraInterceptors();
+      _hasuraConnect = HasuraConnect(BASE_URL, interceptors: [interceptor]);
     }
   }
 
   CustomHasuraConnect([HasuraConnect client]) {
     _initConfig(client);
   }
+}
+
+class _HasuraInterceptors extends Interceptor {
+  @override
+  Future<void> onConnected(HasuraConnect connect) {}
+
+  @override
+  Future<void> onDisconnected() {}
+
+  @override
+  Future onError(HasuraError request) async {
+    print(request);
+  }
+
+  @override
+  Future onRequest(Request request) async {
+    print("ON REQUEST");
+    request.headers['x-hasura-admin-secret'] = HASURA_ADM_SECRECT;
+    return request;
+  }
+
+  @override
+  Future onResponse(Response data) async {
+    return data;
+  }
+
+  @override
+  Future<void> onSubscription(Request request, Snapshot snapshot) {}
+
+  @override
+  Future<void> onTryAgain(HasuraConnect connect) {}
 }

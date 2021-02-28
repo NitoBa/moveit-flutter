@@ -11,7 +11,7 @@ import 'package:moveitflutter/app/shared/hasura/custom_hasura.dart';
 class LoginBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoginDatasourceImpl>(
+    Get.lazyPut<ILoginDatasource>(
       () => LoginDatasourceImpl(Get.find<CustomHasuraConnect>()),
     );
     Get.lazyPut<ILoginRepository>(

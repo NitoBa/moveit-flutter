@@ -23,8 +23,9 @@ class LoginRepositoryImpl implements ILoginRepository {
 
       return Right(result);
     } catch (e) {
+      print(e);
       return Left(
-        ErrorMessage(message: "Error at login"),
+        ErrorMessage(message: "Error, email or password invalids"),
       );
     }
   }

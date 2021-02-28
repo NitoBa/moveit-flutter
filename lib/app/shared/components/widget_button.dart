@@ -24,9 +24,7 @@ class WidgetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onHover: (isHover) {
-        print("Hover");
-      },
+      onHover: (isHover) {},
       child: Container(
         height: height,
         width: width,

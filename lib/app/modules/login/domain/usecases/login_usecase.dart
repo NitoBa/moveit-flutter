@@ -23,6 +23,15 @@ class LoginUsecase implements ILoginUsecase {
     String email,
     String password,
   }) async {
+    if (email.isEmpty || password.isEmpty) {
+      return Left(
+        ErrorMessage(message: 'Email and Password are required fields'),
+      );
+    }
+
+    email = email.trim();
+    password = password.trim();
+
     if (!email.isValidEmail()) {
       return Left(ErrorMessage(message: 'Type an email valid'));
     }
