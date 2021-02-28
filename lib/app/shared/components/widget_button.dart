@@ -4,7 +4,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import '../app_colors.dart';
 import '../size_config.dart';
 
-class WidgetButton extends StatelessWidget {
+class WidgetButton extends StatefulWidget {
   final double height;
   final double width;
   final String text;
@@ -22,43 +22,51 @@ class WidgetButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _WidgetButtonState createState() => _WidgetButtonState();
+}
+
+class _WidgetButtonState extends State<WidgetButton> {
+  bool isHover = false;
+
+  @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onHover: (isHover) {},
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          color: AppColors.blue2,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: MaterialButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Row(
-            children: [
-              Spacer(),
-              Text(
-                text,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: textFontSize,
-                ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(5),
-              ),
-              Icon(
-                FeatherIcons.logIn,
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
+      height: widget.height,
+      width: widget.width,
+      decoration: BoxDecoration(
+        color: isHover ? AppColors.greenColor : AppColors.blue2,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: InkWell(
+        onHover: (hover) {
+          setState(() {
+            isHover = hover;
+          });
+        },
+        borderRadius: BorderRadius.circular(5),
+        child: Row(
+          children: [
+            Spacer(),
+            Text(
+              widget.text,
+              style: TextStyle(
                 color: Colors.white,
-                size: getProportionateScreenHeight(24),
+                fontSize: widget.textFontSize,
               ),
-              Spacer(),
-            ],
-          ),
-          onPressed: onPressed,
+            ),
+            SizedBox(
+              width: getProportionateScreenWidth(5),
+            ),
+            Icon(
+              FeatherIcons.logIn,
+              color: Colors.white,
+              size: getProportionateScreenHeight(24),
+            ),
+            Spacer(),
+          ],
         ),
+        onTap: widget.onPressed,
       ),
     );
   }
