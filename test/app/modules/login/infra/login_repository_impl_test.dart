@@ -59,6 +59,6 @@ void main() {
 
     expect(result.isLeft(), isTrue);
     expect(error, isInstanceOf<ErrorMessage>());
-    expect(error.message, equals("Error at login"));
+    expect(error.message, equals("Error, email or password invalids"));
   });
 }
