@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +39,8 @@ class LoginController extends GetxController {
       (r) async {
         _isLoadingOnLogin.toggle();
         _resetTextsFields();
-        await _localStorage.save('user_logged', "Usuário logado");
+        final userLogged = jsonEncode(r);
+        await _localStorage.save('user_logged', userLogged);
         Get.offNamedUntil('/home', (route) => false);
       },
     );

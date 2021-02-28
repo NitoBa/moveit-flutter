@@ -30,4 +30,16 @@ class UserModel extends UserEntity {
       challengeCompleteds: json['challenges_completed'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['level'] = level;
+    data['photo_url'] = photoUrl;
+    data['current_experience'] = currentExperience;
+    data['challenges_completed'] = challengeCompleteds;
+    return data;
+  }
 }
