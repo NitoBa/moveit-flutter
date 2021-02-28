@@ -1,4 +1,6 @@
+import 'package:crypt/crypt.dart';
 import 'package:dartz/dartz.dart';
+import 'package:moveitflutter/app/shared/constants.dart';
 import '../../../../shared/error/error_message.dart';
 import '../../../../shared/error/failure.dart';
 import '../entities/user_entity.dart';
@@ -34,10 +36,17 @@ class LoginUsecase implements ILoginUsecase {
       );
     }
 
+    final hashedPwd = Crypt.sha256(
+      password,
+      rounds: 4,
+      salt: secrectSalt,
+    );
+
     final result = await _loginRepository.loginRepository(
       email: email,
-      password: password,
+      password: hashedPwd.hash,
     );
+
     return result;
   }
 }

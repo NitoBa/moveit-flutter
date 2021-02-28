@@ -23,7 +23,7 @@ void main() {
       UserEntity userEntity;
       when(repository.loginRepository(
         email: "bruno@gmail.com",
-        password: "password",
+        password: "LzPGGl7oYsNgREhBcwSVuaZCUiHMmH.oTjP.eZrhbd3",
       )).thenAnswer(
         (_) async => Right(UserEntity(id: "123456")),
       );
@@ -48,7 +48,7 @@ void main() {
       when(
         repository.loginRepository(
           email: "bruno@gmail.com",
-          password: "incorrect",
+          password: "1anp2929xaw6nU6Vgs35Q164rIImjA2ZSq6bEyNv4F.",
         ),
       ).thenAnswer(
         (_) async => Left(ErrorMessage(message: "Error, incorrect password")),
