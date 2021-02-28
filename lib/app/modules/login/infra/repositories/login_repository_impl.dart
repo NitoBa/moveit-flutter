@@ -1,13 +1,10 @@
-import 'package:hasura_connect/hasura_connect.dart';
-import 'package:moveitflutter/app/modules/login/infra/datasource/i_login_datasource.dart';
-import 'package:moveitflutter/app/shared/error/error_message.dart';
-import 'package:moveitflutter/app/shared/error/failure.dart';
-
-import 'package:moveitflutter/app/modules/login/domain/entities/user_entity.dart';
-
 import 'package:dartz/dartz.dart';
 
+import '../../../../shared/error/error_message.dart';
+import '../../../../shared/error/failure.dart';
+import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/i_login_repository.dart';
+import '../datasource/i_login_datasource.dart';
 
 class LoginRepositoryImpl implements ILoginRepository {
   final ILoginDatasource _datasource;

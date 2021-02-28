@@ -23,14 +23,18 @@ class CustomHasuraConnect {
 
 class _HasuraInterceptors extends Interceptor {
   @override
-  Future<void> onConnected(HasuraConnect connect) {}
+  Future<void> onConnected(HasuraConnect connect) async {
+    return connect;
+  }
 
   @override
-  Future<void> onDisconnected() {}
+  Future<void> onDisconnected() async {
+    return;
+  }
 
   @override
   Future onError(HasuraError request) async {
-    print(request);
+    return request;
   }
 
   @override
@@ -46,8 +50,8 @@ class _HasuraInterceptors extends Interceptor {
   }
 
   @override
-  Future<void> onSubscription(Request request, Snapshot snapshot) {}
+  Future<void> onSubscription(Request request, Snapshot snapshot) async {}
 
   @override
-  Future<void> onTryAgain(HasuraConnect connect) {}
+  Future<void> onTryAgain(HasuraConnect connect) async {}
 }
