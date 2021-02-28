@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:moveitflutter/app/modules/login/domain/entities/user_entity.dart';
 import 'package:moveitflutter/app/modules/login/external/datasource/login_datasource_impl.dart';
 import 'package:moveitflutter/app/modules/login/infra/datasource/i_login_datasource.dart';
+import 'package:moveitflutter/app/shared/hasura/custom_hasura.dart';
 
 class HasuraConnectMock extends Mock implements HasuraConnect {}
 
@@ -24,11 +25,13 @@ Map<String, dynamic> jsonData = {
 };
 
 void main() {
+  CustomHasuraConnect customHasuraConnect;
   HasuraConnect hasuraConnectMock;
   ILoginDatasource loginDatasource;
   setUp(() {
     hasuraConnectMock = HasuraConnectMock();
-    loginDatasource = LoginDatasourceImpl(hasuraConnectMock);
+    customHasuraConnect = CustomHasuraConnect(hasuraConnectMock);
+    loginDatasource = LoginDatasourceImpl(customHasuraConnect);
   });
 
   test("should be return an instance of the LoginDatasource", () {

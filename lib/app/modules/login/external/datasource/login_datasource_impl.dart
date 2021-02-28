@@ -1,12 +1,11 @@
-import 'package:hasura_connect/hasura_connect.dart';
-import 'package:moveitflutter/app/modules/login/infra/models/user_model.dart';
-
+import '../../../../shared/hasura/custom_hasura.dart';
 import '../../infra/datasource/i_login_datasource.dart';
+import '../../infra/models/user_model.dart';
 
 class LoginDatasourceImpl implements ILoginDatasource {
-  final HasuraConnect _hasuraConnect;
+  final CustomHasuraConnect _customHasuraConnect;
 
-  LoginDatasourceImpl(this._hasuraConnect);
+  LoginDatasourceImpl(this._customHasuraConnect);
   @override
   Future<UserModel> loginDatasource({String email, String password}) async {
     String loginQuery = """ 
@@ -23,7 +22,7 @@ class LoginDatasourceImpl implements ILoginDatasource {
     }
     """;
 
-    final response = await _hasuraConnect.query(
+    final response = await _customHasuraConnect.hasura.query(
       loginQuery,
       variables: {
         "email": email,
