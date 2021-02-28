@@ -39,8 +39,7 @@ class LoginController extends GetxController {
       (r) async {
         _isLoadingOnLogin.toggle();
         _resetTextsFields();
-        final userLogged = jsonEncode(r);
-        await _localStorage.save('user_logged', userLogged);
+        await _localStorage.save('user_logged', jsonEncode(r));
         Get.offNamedUntil('/home', (route) => false);
       },
     );
