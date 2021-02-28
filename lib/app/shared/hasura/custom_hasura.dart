@@ -39,7 +39,7 @@ class _HasuraInterceptors extends Interceptor {
 
   @override
   Future onRequest(Request request) async {
-    print("ON REQUEST");
+    // print("ON REQUEST");
     request.headers['x-hasura-admin-secret'] = HASURA_ADM_SECRECT;
     return request;
   }

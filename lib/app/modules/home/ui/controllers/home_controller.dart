@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../shared/app_colors.dart';
 import '../../../../shared/services/local_storage/i_local_storage.dart';
 
