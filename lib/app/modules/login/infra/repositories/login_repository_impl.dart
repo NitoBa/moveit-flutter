@@ -26,4 +26,12 @@ class LoginRepositoryImpl implements ILoginRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, String>> registerUserRepository({
+    String username,
+    String email,
+    String password,
+    String photoUrl,
+  }) async {}
 }

@@ -7,6 +7,7 @@ import 'package:moveitflutter/app/modules/login/infra/repositories/login_reposit
 import 'package:moveitflutter/app/modules/login/ui/controllers/login_controller.dart';
 import 'package:moveitflutter/app/modules/login/ui/controllers/register_controller.dart';
 import 'package:moveitflutter/app/shared/hasura/custom_hasura.dart';
+import 'package:moveitflutter/app/shared/services/local_storage/i_local_storage.dart';
 
 class LoginBinding implements Bindings {
   @override
@@ -20,7 +21,12 @@ class LoginBinding implements Bindings {
     Get.lazyPut<ILoginUsecase>(
       () => LoginUsecase(Get.find<ILoginRepository>()),
     );
-    Get.lazyPut(() => LoginController(Get.find<ILoginUsecase>()));
+    Get.lazyPut(
+      () => LoginController(
+        Get.find<ILoginUsecase>(),
+        Get.find<ILocalStorage>(),
+      ),
+    );
     Get.lazyPut(() => RegisterController());
   }
 }
